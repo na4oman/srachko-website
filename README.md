@@ -120,7 +120,7 @@ srachko-website/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/srachko-website.git
+git clone https://github.com/na4oman/srachko-website.git
 cd srachko-website
 ```
 
