@@ -385,53 +385,6 @@ const ServiceRequestForm: React.FC = () => {
                       </FormItem>
                     )}
                   />
-
-                  <div className='space-y-4'>
-                    <label className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>
-                      Снимки (по избор)
-                    </label>
-                    <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
-                      {(form.watch('imageUrls') || []).map((url, index) => (
-                        <div
-                          key={url}
-                          className='relative aspect-square rounded-md overflow-hidden border'
-                        >
-                          <img
-                            src={url}
-                            alt={`Уред ${index + 1}`}
-                            className='object-cover w-full h-full'
-                          />
-                          <button
-                            type='button'
-                            onClick={() => removeImage(index)}
-                            className='absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors'
-                          >
-                            <X className='h-3 w-3' />
-                          </button>
-                        </div>
-                      ))}
-                      <label className='flex flex-col items-center justify-center aspect-square rounded-md border-2 border-dashed border-slate-300 hover:border-primary cursor-pointer transition-colors'>
-                        <Upload className='h-6 w-6 text-slate-400 mb-2' />
-                        <span className='text-[10px] text-slate-500 text-center px-2'>
-                          Качи снимка
-                        </span>
-                        <input
-                          type='file'
-                          multiple
-                          accept='image/*'
-                          className='hidden'
-                          onChange={handleImageUpload}
-                          disabled={uploading}
-                        />
-                      </label>
-                    </div>
-                    {uploading && (
-                      <div className='flex items-center gap-2 text-sm text-slate-500'>
-                        <Loader2 className='h-4 w-4 animate-spin' />
-                        <span>Качване...</span>
-                      </div>
-                    )}
-                  </div>
                 </div>
               )}
 
@@ -534,6 +487,56 @@ const ServiceRequestForm: React.FC = () => {
                       </FormItem>
                     )}
                   />
+
+                  <div className='space-y-4'>
+                    <label className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>
+                      Снимки на уреда (по избор)
+                    </label>
+                    <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+                      {(form.watch('imageUrls') || []).map((url, index) => (
+                        <div
+                          key={url}
+                          className='relative aspect-square rounded-md overflow-hidden border'
+                        >
+                          <img
+                            src={url}
+                            alt={`Уред ${index + 1}`}
+                            className='object-cover w-full h-full'
+                          />
+                          <button
+                            type='button'
+                            onClick={() => removeImage(index)}
+                            className='absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors'
+                          >
+                            <X className='h-3 w-3' />
+                          </button>
+                        </div>
+                      ))}
+                      <label className='flex flex-col items-center justify-center aspect-square rounded-md border-2 border-dashed border-slate-300 hover:border-primary cursor-pointer transition-colors'>
+                        <Upload className='h-6 w-6 text-slate-400 mb-2' />
+                        <span className='text-[10px] text-slate-500 text-center px-2'>
+                          Качи снимка
+                        </span>
+                        <input
+                          type='file'
+                          multiple
+                          accept='image/*'
+                          className='hidden'
+                          onChange={handleImageUpload}
+                          disabled={uploading}
+                        />
+                      </label>
+                    </div>
+                    {uploading && (
+                      <div className='flex items-center gap-2 text-sm text-slate-500'>
+                        <Loader2 className='h-4 w-4 animate-spin' />
+                        <span>Качване...</span>
+                      </div>
+                    )}
+                    <FormDescription>
+                      Качете снимки на уреда, етикета със серийния номер или проблемната част. Това ще помогне на техниците да се подготвят по-добре.
+                    </FormDescription>
+                  </div>
                 </div>
               )}
 
