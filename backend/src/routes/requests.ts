@@ -13,11 +13,18 @@ router.post('/', async (req, res, next) => {
   try {
     const validatedData = createRequestSchema.parse(req.body)
 
+    // Convert preferredDate string to Date object if present
+    const dataToInsert: any = { ...validatedData }
+    if (dataToInsert.preferredDate && typeof dataToInsert.preferredDate === 'string') {
+      const parsed = new Date(dataToInsert.preferredDate)
+      dataToInsert.preferredDate = isNaN(parsed.getTime()) ? null : parsed
+    } else {
+      dataToInsert.preferredDate = null
+    }
+
     const [newRequest] = await db
       .insert(serviceRequests)
-      .values({
-        ...validatedData,
-      } as any)
+      .values(dataToInsert)
       .returning()
 
     // Send email notification (don't block the response)
