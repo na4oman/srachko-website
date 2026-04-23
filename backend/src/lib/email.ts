@@ -22,7 +22,7 @@ export const sendServiceRequestEmail = async (requestData: any) => {
     streetNumber,
   } = requestData
 
-  const fromEmail = process.env.RESEND_FROM_EMAIL || 'noreply@srachko.bg'
+  const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
   const adminEmail = process.env.ADMIN_EMAIL || 'v.srachko@gmail.com'
 
   try {
