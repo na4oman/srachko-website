@@ -198,18 +198,20 @@ const ServiceRequestForm: React.FC = () => {
       case 1:
         return ['firstName', 'lastName', 'email', 'phone']
       case 2:
-        return ['brand', 'model', 'serialNumber', 'complaint', 'warrantyStatus']
+        // Device step - validate based on request type
+        const fields = ['brand', 'model']
+        if (requestType === 'Ремонт') {
+          fields.push('serialNumber', 'complaint', 'warrantyStatus')
+        } else if (requestType === 'Запитване за част') {
+          fields.push('complaint')
+        } else if (requestType === 'Регистрация на уреди') {
+          fields.push('serialNumber')
+        } else if (requestType === 'Монтаж') {
+          fields.push('complaint')
+        }
+        return fields
       case 3:
-        return [
-          'city',
-          'district',
-          'street',
-          'streetNumber',
-          'block',
-          'entrance',
-          'floor',
-          'apartment',
-        ]
+        return ['city', 'street', 'streetNumber']
       default:
         return []
     }
