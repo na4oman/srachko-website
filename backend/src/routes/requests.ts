@@ -28,9 +28,13 @@ router.post('/', async (req, res, next) => {
       .returning()
 
     // Send email notification (don't block the response)
-    sendServiceRequestEmail(newRequest).catch(err =>
-      console.error('Failed to send email:', err),
-    )
+    sendServiceRequestEmail(newRequest).catch(err => {
+      console.error('Failed to send email:', err)
+      // Log specific SendGrid errors for debugging
+      if (err.response?.body?.errors) {
+        console.error('SendGrid error details:', err.response.body.errors)
+      }
+    })
 
     res.status(201).json({
       message: 'Service request created successfully',
